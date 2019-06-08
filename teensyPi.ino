@@ -3,7 +3,7 @@
 #include "rpiSerialMonitor.h"
 
 #define TEST_KEYPAD   0
-#define TEST_LOOPER_BUTTONS  1
+#define TEST_LOOPER_BUTTONS  0
 
 #if TEST_LOOPER_BUTTONS
     #define PIN_BUTTON1    18
