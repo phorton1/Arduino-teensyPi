@@ -11,7 +11,7 @@ int blink_state = 0;
 rpiSerialMonitor monitor(0,0);
 
 
-#define WITH_EXPRESSION_PEDAL  1
+#define WITH_EXPRESSION_PEDAL  0
 
 #if WITH_EXPRESSION_PEDAL
 
