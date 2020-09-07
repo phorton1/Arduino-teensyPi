@@ -1,7 +1,7 @@
 #include "myDebug.h"
 #include "rpiSerialMonitor.h"
 
-#define WITH_SERIAL2   9
+#define WITH_SERIAL2   1
 
 
 #define PIN_ONBOARD_LED     13
@@ -40,10 +40,13 @@ void loop()
     monitor.task();
 
     #if WITH_SERIAL2
+        // If anything on the coming over serial 2
+        // write it to the PI AND as a message over the main Serial
         if (Serial2.available())
         {
             int c = Serial2.read();
-            Serial.write(c);
+            Serial1.write(c);
+            display(0,"serial2 received chr(%d) and sent it to Serial1",c);
         }
     #endif
 
