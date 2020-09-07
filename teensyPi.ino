@@ -1,7 +1,7 @@
 #include "myDebug.h"
 #include "rpiSerialMonitor.h"
 
-#define WITH_SERIAL2   1
+#define WITH_SERIAL2   9
 
 
 #define PIN_ONBOARD_LED     13
@@ -13,13 +13,13 @@ int blink_state = 0;
 rpiSerialMonitor monitor(0,0);
 
 
-void setup() 
-{ 
+void setup()
+{
     Serial.begin(115200);   // 115200);   // 921600);
     Serial1.begin(115200);
-    
+
     pinMode(PIN_ONBOARD_LED,OUTPUT);
-        
+
     delay(600);
     display(0,"teensyPi v1.1 started",0);
 
@@ -27,12 +27,15 @@ void setup()
         display(0,"opening Serial2",0);
         Serial2.begin(115200);
     #endif
-    
+
+    monitor.rebootPi();
+        // if both are started at the same time,
+        // the teensy supresses the pi bootstrap
 
 }
 
 
-void loop() 
+void loop()
 {
     monitor.task();
 
@@ -41,9 +44,9 @@ void loop()
         {
             int c = Serial2.read();
             Serial.write(c);
-        }        
+        }
     #endif
-    
+
 
     if (blink_time > (blink_state ? BLINK_ON_TIME : BLINK_OFF_TIME))
     {
