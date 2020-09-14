@@ -16,17 +16,20 @@ rpiSerialMonitor monitor(0,0);
 void setup()
 {
     Serial.begin(115200);   // 115200);   // 921600);
+    delay(2000);
+    display(0,"teensyPi v1.4 started",0);
+
     Serial1.begin(115200);
 
     pinMode(PIN_ONBOARD_LED,OUTPUT);
 
-    delay(600);
-    display(0,"teensyPi v1.1 started",0);
 
     #if WITH_SERIAL2
         display(0,"opening Serial2",0);
         Serial2.begin(115200);
     #endif
+
+    monitor.init();
 
     monitor.rebootPi();
         // if both are started at the same time,
